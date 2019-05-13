@@ -10,7 +10,7 @@ import me.kamilkorzeniewski.conference.schedule.lecture.Lecture;
 
      ScheduleGridItem(Lecture lecture){
         final Label name = new Label(lecture.getName());
-        final Button bookButton = new Button("Book");
+        final Button bookButton = new Button("Reserve");
         addComponents(name,bookButton);
         bookButton.addClickListener((event) -> getUI().addWindow(new ReservationWindow(lecture)));
      }

@@ -4,17 +4,17 @@ package me.kamilkorzeniewski.conference.reservation;
 import javax.persistence.*;
 
 @Entity
-class Reservation {
+public class Reservation {
     @Id
     @GeneratedValue
     @Column(name="reservation_id")
     private int id;
 
     @Column(name="user_id")
-    private  int userId;
+    private int userId;
 
     @Column(name="lecture_id")
-    private  int lectureId;
+    private int lectureId;
 
     private Reservation(){}
 
@@ -29,5 +29,9 @@ class Reservation {
 
     int getUserId() {
         return userId;
+    }
+
+    public int getId() {
+        return id;
     }
 }
