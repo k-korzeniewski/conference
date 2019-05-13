@@ -55,7 +55,7 @@ public class ScheduleGrid extends GridLayout {
     }
 
     /*
-     * Insert lectures to grid in given column by topic.
+     * Insert lectures from specific topic to given column.
      * Lectures are sorted by startTime ascending.
      */
     private void addLecturesByTopic(LectureTopic topic, int column, int row_offset) {

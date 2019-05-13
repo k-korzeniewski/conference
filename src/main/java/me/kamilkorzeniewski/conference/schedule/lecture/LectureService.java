@@ -6,11 +6,12 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class LectureService {
 
-    public static List<Lecture> getLectures() {
+    private static List<Lecture> getLectures() {
         final List<Lecture> lectureList = new ArrayList<>();
         final int TICKETS_POOL = 5;
         final LocalDate FIRST_DAY = LocalDate.of(2019, 6, 1);
@@ -24,11 +25,11 @@ public class LectureService {
                 LectureTopic.FIRST, TICKETS_POOL,
                 LocalDateTime.of(FIRST_DAY, LocalTime.of(12, 0)),
                 LocalDateTime.of(FIRST_DAY, LocalTime.of(13, 45))));
-        lectureList.add(new Lecture(3, "great lecture I",
+        lectureList.add(new Lecture(2, "great lecture I",
                 LectureTopic.FIRST, TICKETS_POOL,
                 LocalDateTime.of(SECOND_DAY, LocalTime.of(10, 0)),
                 LocalDateTime.of(SECOND_DAY, LocalTime.of(11, 45))));
-        lectureList.add(new Lecture(4, "boring lecture I",
+        lectureList.add(new Lecture(3, "boring lecture I",
                 LectureTopic.FIRST, TICKETS_POOL,
                 LocalDateTime.of(SECOND_DAY, LocalTime.of(12, 0)),
                 LocalDateTime.of(SECOND_DAY, LocalTime.of(13, 45))));
@@ -73,8 +74,14 @@ public class LectureService {
 
     public static List<Lecture> getLecturesByTopic(LectureTopic topic){
         return getLectures().stream()
-                .filter((lecture -> lecture.isTopicEquals(topic)))
+                .filter(lecture -> lecture.isTopicEquals(topic))
                 .sorted(Comparator.comparing(Lecture::getStartTime))
                 .collect(Collectors.toList());
     }
+
+    public static Optional<Lecture> getById(int lectureId){
+        return getLectures().stream().filter(lecture -> lecture.getId() == lectureId).findFirst();
+    }
+
+
 }

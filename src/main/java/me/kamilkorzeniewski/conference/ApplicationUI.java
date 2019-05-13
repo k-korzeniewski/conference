@@ -3,6 +3,7 @@ package me.kamilkorzeniewski.conference;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
+import me.kamilkorzeniewski.conference.reservation.ReservationWindow;
 import me.kamilkorzeniewski.conference.schedule.ScheduleGrid;
 
 @SpringUI
@@ -10,7 +11,6 @@ public class ApplicationUI extends UI {
 
     private final VerticalLayout content;
     private final ScheduleGrid scheduleGrid;
-
 
     public ApplicationUI(ScheduleGrid scheduleGrid){
         content = new VerticalLayout();

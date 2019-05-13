@@ -24,13 +24,24 @@ public class Lecture {
         return name;
     }
 
+    public int getTickets() {
+        return tickets;
+    }
+
     LocalDateTime getStartTime() {
         return startTime;
     }
 
-    boolean isTopicEquals(LectureTopic topic){
+    public boolean isStartTimeEqual(Lecture lecture){
+        return getStartTime().equals(lecture.getStartTime());
+    }
+
+    boolean isTopicEquals(LectureTopic topic) {
         return this.topic.equals(topic);
     }
 
 
+    public int getId() {
+        return id;
+    }
 }
