@@ -33,7 +33,7 @@ public class ReservationWindowController {
                     .createReservation(new Reservation(fetchedUser.getId(), lecture.getId()));
             Email email = Email.from(reservation,user);
             emailService.saveEmail(email);
-            Notification.show("Reservation successful");
+            Notification.show("Reservation successful, email has been send");
         } catch (ReservationException ex) {
             Notification.show(ex.getMessage(),Notification.Type.WARNING_MESSAGE);
         }

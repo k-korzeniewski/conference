@@ -1,4 +1,4 @@
-package me.kamilkorzeniewski.conference;
+package me.kamilkorzeniewski.conference.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

@@ -21,7 +21,7 @@ public class Email {
         LocalDateTime sendTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
         String to = user.getEmail();
         String content = "Potwierdzenie dokonania rezerwacji nr " + reservation.getId() + "\n"
-                + "W celu anulowania rezerwacji prosimy zalogować się na naszej stronie";
+                + "W celu anulowania rezerswacji prosimy zalogować się na naszej stronie";
         return new Email(sendTime, to, content);
     }
 

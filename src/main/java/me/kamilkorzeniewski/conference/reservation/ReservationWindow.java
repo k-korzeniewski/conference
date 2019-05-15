@@ -2,11 +2,8 @@ package me.kamilkorzeniewski.conference.reservation;
 
 import com.vaadin.data.Binder;
 import com.vaadin.data.validator.EmailValidator;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
-import me.kamilkorzeniewski.conference.SpringContext;
+import com.vaadin.ui.*;
+import me.kamilkorzeniewski.conference.utils.SpringContext;
 import me.kamilkorzeniewski.conference.schedule.lecture.Lecture;
 import me.kamilkorzeniewski.conference.user.User;
 
@@ -31,7 +28,8 @@ public class ReservationWindow extends Window {
 
         setResizable(false);
         center();
-
+        setWidth(25,Unit.PERCENTAGE);
+        setHeight(25,Unit.PERCENTAGE);
         setContent(content);
         setUpComponents();
 
@@ -48,8 +46,10 @@ public class ReservationWindow extends Window {
         userNameInput.addAttachListener((event)-> validateInputs());
         emailInput.addAttachListener((event) -> validateInputs());
 
-        bookButton.addClickListener((event) -> getController().doReservation(userBinder.getBean(),lecture));
-
+        bookButton.addClickListener((event) -> {
+            getController().doReservation(userBinder.getBean(),lecture);
+            close();
+        });
         userBinder.setBean(new User());
         userBinder.forField(userNameInput)
                 .asRequired("User name required")
@@ -59,7 +59,11 @@ public class ReservationWindow extends Window {
                 .asRequired("Email required")
                 .withValidator(new EmailValidator("Email incorrect"))
                 .bind(User::getEmail,User::setEmail);
+
         content.addComponents(userNameInput, emailInput, bookButton);
+        content.setComponentAlignment(userNameInput,Alignment.MIDDLE_CENTER);
+        content.setComponentAlignment(emailInput,Alignment.MIDDLE_CENTER);
+        content.setComponentAlignment(bookButton,Alignment.MIDDLE_CENTER);
     }
 
     private void validateInputs(){

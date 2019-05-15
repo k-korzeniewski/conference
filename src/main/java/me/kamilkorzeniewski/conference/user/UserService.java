@@ -17,14 +17,8 @@ public class UserService {
         return userRepository.findByName(name);
     }
 
-    public boolean isUserExists(String name) {
-        return findUserByName(name).isPresent();
-    }
-
     public User createUser(User user) {
         return userRepository.save(user);
     }
-
-
 
 }

@@ -2,37 +2,45 @@ package me.kamilkorzeniewski.conference;
 
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.spring.navigator.SpringNavigator;
 import com.vaadin.ui.*;
-import me.kamilkorzeniewski.conference.reservation.ReservationWindow;
-import me.kamilkorzeniewski.conference.schedule.ScheduleGrid;
+import me.kamilkorzeniewski.conference.user.UserView;
 
 @SpringUI
 public class ApplicationUI extends UI {
-
     private final VerticalLayout content;
-    private final ScheduleGrid scheduleGrid;
+    private final Panel panel;
 
-    public ApplicationUI(ScheduleGrid scheduleGrid){
+    private final SpringNavigator springNavigator;
+
+    public ApplicationUI(SpringNavigator springNavigator) {
         content = new VerticalLayout();
-        this.scheduleGrid = scheduleGrid;
+        panel = new Panel();
+        this.springNavigator = springNavigator;
     }
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         setContent(content);
         addHeader();
-        addScheduleGrid();
+        content.addComponent(panel);
+        springNavigator.init(this,panel);
+        setNavigator(springNavigator);
     }
 
-    private void addScheduleGrid(){
-        content.addComponent(scheduleGrid);
-        content.setComponentAlignment(scheduleGrid,Alignment.TOP_CENTER);
-        content.setExpandRatio(scheduleGrid,1.0f);
-    }
 
-    private void addHeader(){
+    private void addHeader() {
         HorizontalLayout header = new HorizontalLayout();
-        header.addComponent(new Label("IT CONFERENCE"));
+        Label title = new Label("IT CONFERENCE");
+        Button mainViewButton = new Button("Home page", e -> springNavigator.navigateTo(MainView.NAME));
+        Button userViewButton = new Button("User", e -> springNavigator.navigateTo(UserView.NAME));
+        header.addComponents(title, mainViewButton, userViewButton);
+
+        header.setComponentAlignment(mainViewButton,Alignment.MIDDLE_RIGHT);
+        header.setComponentAlignment(userViewButton,Alignment.MIDDLE_RIGHT);
+        header.setExpandRatio(title,1f);
+        header.setWidth(100,Unit.PERCENTAGE);
+
         content.addComponent(header);
     }
 

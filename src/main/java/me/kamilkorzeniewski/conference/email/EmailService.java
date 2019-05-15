@@ -1,5 +1,6 @@
 package me.kamilkorzeniewski.conference.email;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -10,9 +11,10 @@ import java.io.OutputStreamWriter;
 @Service
 public class EmailService {
 
+    @Value("${app.email.file}")
+    private String fileName;
 
-    private static FileOutputStream getEmailFileOutputStream() throws IOException {
-        String fileName = "powiadomienia.txt";
+    private FileOutputStream getEmailFileOutputStream() throws IOException {
         File file = new File(fileName);
         file.createNewFile();
         return new FileOutputStream(file, true);
