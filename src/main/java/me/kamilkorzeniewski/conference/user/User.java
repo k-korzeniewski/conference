@@ -21,6 +21,16 @@ public class User {
     public User() {
     }
 
+    public User(int id, String name, String email) {
+        this.name = name;
+        this.email = email;
+        this.id = id;
+    }
+
+    public User withEmail(String email){
+        return new User(this.id,this.name,email);
+    }
+
     public boolean isEmailEqual(String email){
         return this.email.equals(email);
     }

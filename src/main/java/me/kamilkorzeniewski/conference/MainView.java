@@ -9,7 +9,7 @@ import me.kamilkorzeniewski.conference.schedule.ScheduleGrid;
 
 @SpringView(name=MainView.NAME)
 public class MainView extends VerticalLayout implements View {
-    static final String NAME = "";
+    public static final String NAME = "";
     private final ScheduleGrid scheduleGrid;
 
 

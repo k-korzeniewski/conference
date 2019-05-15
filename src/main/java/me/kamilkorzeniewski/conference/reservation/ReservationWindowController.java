@@ -23,22 +23,22 @@ public class ReservationWindowController {
     }
 
     void doReservation(User user, Lecture lecture) {
-        User fetchedUser = userService.findUserByName(user.getName()).orElseGet(()->userService.createUser(user));
+        User fetchedUser = userService.findUserByName(user.getName())
+                                        .orElseGet(() -> userService.saveUser(user));
         if (!fetchedUser.isEmailEqual(user.getEmail())) {
-            Notification.show("User already exists",Notification.Type.WARNING_MESSAGE);
+            Notification.show("User already exists", Notification.Type.WARNING_MESSAGE);
             return;
         }
         try {
-           Reservation reservation =  reservationService
+            Reservation reservation = reservationService
                     .createReservation(new Reservation(fetchedUser.getId(), lecture.getId()));
-            Email email = Email.from(reservation,user);
+            Email email = Email.from(reservation, user);
             emailService.saveEmail(email);
             Notification.show("Reservation successful, email has been send");
         } catch (ReservationException ex) {
-            Notification.show(ex.getMessage(),Notification.Type.WARNING_MESSAGE);
+            Notification.show(ex.getMessage(), Notification.Type.WARNING_MESSAGE);
         }
     }
-
 
 
 }

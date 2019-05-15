@@ -6,7 +6,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     private final UserRepository userRepository;
 
     UserService(UserRepository userRepository) {
@@ -17,8 +16,7 @@ public class UserService {
         return userRepository.findByName(name);
     }
 
-    public User createUser(User user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
-
 }
