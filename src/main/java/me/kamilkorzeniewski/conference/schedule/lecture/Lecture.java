@@ -1,6 +1,7 @@
 package me.kamilkorzeniewski.conference.schedule.lecture;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Lecture {
@@ -28,7 +29,7 @@ public class Lecture {
         return tickets;
     }
 
-    LocalDateTime getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
@@ -40,6 +41,12 @@ public class Lecture {
         return this.topic.equals(topic);
     }
 
+    public String duringDateTime(){
+        return startTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm"))
+                + " - " +
+                endTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+    }
 
     public int getId() {
         return id;

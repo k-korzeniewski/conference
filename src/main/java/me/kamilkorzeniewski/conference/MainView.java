@@ -12,7 +12,6 @@ public class MainView extends VerticalLayout implements View {
     public static final String NAME = "";
     private final ScheduleGrid scheduleGrid;
 
-
     public MainView(ScheduleGrid scheduleGrid){
         this.scheduleGrid = scheduleGrid;
     }

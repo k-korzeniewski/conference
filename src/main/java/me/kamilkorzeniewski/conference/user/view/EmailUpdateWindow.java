@@ -17,7 +17,7 @@ class EmailUpdateWindow extends Window {
     EmailUpdateWindow(User user) {
         final VerticalLayout content = new VerticalLayout();
         this.user = user;
-        this.emailInput = new TextField("new emailInput");
+        this.emailInput = new TextField("New email");
         this.saveButton = new Button("Save", e -> saveButtonHandler());
 
         emailInput.addAttachListener(e -> validateInput());
@@ -32,6 +32,7 @@ class EmailUpdateWindow extends Window {
 
         content.addComponents(emailInput, saveButton);
         setContent(content);
+        center();
     }
 
     private static UserService getUserService() {
@@ -54,9 +55,11 @@ class EmailUpdateWindow extends Window {
 
     private class EmailValue {
         private String email;
+
         String getEmail() {
             return email;
         }
+
         void setEmail(String email) {
             this.email = email;
         }

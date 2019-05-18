@@ -24,8 +24,6 @@ public class LogInView extends VerticalLayout implements View {
         addComponents(userNameInput, logInButton);
     }
 
-
-
     private void logInButtonHandler() {
         userService.findUserByName(userNameInput.getValue()).ifPresentOrElse(usr -> {
             ((ApplicationUI) getUI()).setCurrentUser(usr);

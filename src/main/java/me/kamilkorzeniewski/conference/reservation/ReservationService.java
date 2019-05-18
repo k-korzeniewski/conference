@@ -4,6 +4,7 @@ import me.kamilkorzeniewski.conference.reservation.exception.TicketsNotAvailable
 import me.kamilkorzeniewski.conference.reservation.exception.TimeConflictException;
 import me.kamilkorzeniewski.conference.schedule.lecture.Lecture;
 import me.kamilkorzeniewski.conference.schedule.lecture.LectureService;
+import me.kamilkorzeniewski.conference.user.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @Service
-class ReservationService {
+public class ReservationService {
 
     private final ReservationRepository reservationRepository;
 
@@ -27,6 +28,16 @@ class ReservationService {
         return reservationRepository.save(reservation);
     }
 
+    public List<Reservation> getAllReservationsByUser(User user){
+        return reservationRepository.findAllByUserId(user.getId());
+    }
+
+    public void removeReservation(Reservation reservation){
+        reservationRepository.delete(reservation);
+    }
+    public Optional<Reservation> getReservationById(int id){
+        return reservationRepository.findById(id);
+    }
 
     private boolean isAvailableTicket(int lectureId) {
         List<Reservation> reservationList = reservationRepository.findAllByLectureId(lectureId);

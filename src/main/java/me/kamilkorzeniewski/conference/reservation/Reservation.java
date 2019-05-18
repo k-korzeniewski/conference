@@ -23,7 +23,7 @@ public class Reservation {
         this.lectureId = lectureId;
     }
 
-    int getLectureId() {
+    public int getLectureId() {
         return lectureId;
     }
 
@@ -34,4 +34,5 @@ public class Reservation {
     public int getId() {
         return id;
     }
+
 }
