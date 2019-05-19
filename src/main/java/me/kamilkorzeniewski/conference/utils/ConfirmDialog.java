@@ -29,8 +29,6 @@ public class ConfirmDialog extends Window {
         cancelButton.addClickListener(e->action.execute());
     }
 
-
-
     @FunctionalInterface
     public interface Action {
         void execute();

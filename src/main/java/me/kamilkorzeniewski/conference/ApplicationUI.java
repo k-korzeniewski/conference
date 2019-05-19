@@ -1,5 +1,6 @@
 package me.kamilkorzeniewski.conference;
 
+import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringNavigator;
@@ -8,6 +9,7 @@ import me.kamilkorzeniewski.conference.user.User;
 import me.kamilkorzeniewski.conference.user.view.UserView;
 
 @SpringUI
+@PreserveOnRefresh
 public class ApplicationUI extends UI {
     private final VerticalLayout content;
     private final Panel panel;

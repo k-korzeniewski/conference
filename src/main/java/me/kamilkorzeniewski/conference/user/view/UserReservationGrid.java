@@ -38,8 +38,8 @@ class UserReservationGrid extends Grid<UserReservationGrid.GridReservationItem> 
     }
 
     class GridReservationItem {
-        final Reservation reservation;
-        final Lecture lecture;
+        final private Reservation reservation;
+        final private Lecture lecture;
 
         GridReservationItem(Reservation reservation) {
             this.reservation = reservation;

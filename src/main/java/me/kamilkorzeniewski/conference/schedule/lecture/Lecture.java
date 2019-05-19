@@ -29,7 +29,7 @@ public class Lecture {
         return tickets;
     }
 
-    public LocalDateTime getStartTime() {
+    LocalDateTime getStartTime() {
         return startTime;
     }
 

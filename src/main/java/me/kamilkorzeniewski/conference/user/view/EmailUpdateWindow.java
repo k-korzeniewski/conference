@@ -33,6 +33,7 @@ class EmailUpdateWindow extends Window {
         content.addComponents(emailInput, saveButton);
         setContent(content);
         center();
+        setResizable(false);
     }
 
     private static UserService getUserService() {

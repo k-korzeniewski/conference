@@ -29,7 +29,7 @@ public class ReservationWindow extends Window {
         setResizable(false);
         center();
         setWidth(25,Unit.PERCENTAGE);
-        setHeight(25,Unit.PERCENTAGE);
+        setHeight(30,Unit.PERCENTAGE);
         setContent(content);
         setUpComponents();
 
@@ -50,6 +50,7 @@ public class ReservationWindow extends Window {
             getController().doReservation(userBinder.getBean(),lecture);
             close();
         });
+
         userBinder.setBean(new User());
         userBinder.forField(userNameInput)
                 .asRequired("User name required")

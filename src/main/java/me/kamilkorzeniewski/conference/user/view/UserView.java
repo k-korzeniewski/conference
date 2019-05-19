@@ -3,6 +3,7 @@ package me.kamilkorzeniewski.conference.user.view;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
@@ -13,12 +14,15 @@ import me.kamilkorzeniewski.conference.reservation.ReservationService;
 import me.kamilkorzeniewski.conference.user.User;
 import me.kamilkorzeniewski.conference.utils.ConfirmDialog;
 
+import java.util.NoSuchElementException;
+
 @SpringView(name = UserView.NAME)
 public class UserView extends VerticalLayout implements View {
     public static final String NAME = "user";
     private final Button deleteButton;
-    private  UserReservationGrid grid;
     private final ReservationService reservationService;
+    private UserReservationGrid grid;
+
     public UserView(ReservationService reservationService) {
         deleteButton = new Button("Delete", e -> handleDeleteButton());
         this.reservationService = reservationService;
@@ -38,9 +42,9 @@ public class UserView extends VerticalLayout implements View {
     private void handleDeleteButton() {
         ConfirmDialog dialog = new ConfirmDialog("Are you sure to remove reservation(s) ?");
         dialog.center();
-        dialog.setWidth(30,Unit.PERCENTAGE);
-        dialog.setHeight(20,Unit.PERCENTAGE);
-        dialog.addOnAcceptHandler(()->{
+        dialog.setWidth(30, Unit.PERCENTAGE);
+        dialog.setHeight(20, Unit.PERCENTAGE);
+        dialog.addOnAcceptHandler(() -> {
             removeReservations();
             dialog.close();
         });
@@ -48,14 +52,19 @@ public class UserView extends VerticalLayout implements View {
         getUI().addWindow(dialog);
     }
 
-    private void removeReservations(){
-        for(UserReservationGrid.GridReservationItem item : grid.getSelectedItems()){
+
+    private void removeReservations() {
+        for (UserReservationGrid.GridReservationItem item : grid.getSelectedItems()) {
             int reservationId = item.getReservationId();
             Reservation reservation = reservationService.getReservationById(reservationId)
-                    .orElseThrow(IllegalArgumentException::new); // change this exception !
+                    .orElseThrow(NoSuchElementException::new);
             reservationService.removeReservation(reservation);
             grid.refreshGrid();
         }
+    }
+
+    private void centerComponents() {
+        iterator().forEachRemaining(c -> setComponentAlignment(c, Alignment.MIDDLE_CENTER));
     }
 
     private User currentUser() {
@@ -68,10 +77,12 @@ public class UserView extends VerticalLayout implements View {
             getUI().getNavigator().navigateTo(LogInView.NAME);
             return;
         }
+        
         grid = new UserReservationGrid(currentUser());
         addComponents(createMenu());
         addComponent(grid);
         addComponent(deleteButton);
+        centerComponents();
     }
 
 

@@ -1,5 +1,7 @@
 package me.kamilkorzeniewski.conference.reservation;
 
+import com.vaadin.server.Page;
+import com.vaadin.shared.Position;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.ui.Notification;
 import me.kamilkorzeniewski.conference.email.Email;
@@ -8,6 +10,8 @@ import me.kamilkorzeniewski.conference.reservation.exception.ReservationExceptio
 import me.kamilkorzeniewski.conference.schedule.lecture.Lecture;
 import me.kamilkorzeniewski.conference.user.User;
 import me.kamilkorzeniewski.conference.user.UserService;
+
+import static com.vaadin.ui.Notification.Type.HUMANIZED_MESSAGE;
 
 @SpringComponent
 public class ReservationWindowController {
@@ -26,7 +30,7 @@ public class ReservationWindowController {
         User fetchedUser = userService.findUserByName(user.getName())
                                         .orElseGet(() -> userService.saveUser(user));
         if (!fetchedUser.isEmailEqual(user.getEmail())) {
-            Notification.show("User already exists", Notification.Type.WARNING_MESSAGE);
+            showNotification("User already exists", Notification.Type.WARNING_MESSAGE);
             return;
         }
         try {
@@ -34,11 +38,20 @@ public class ReservationWindowController {
                     .createReservation(new Reservation(fetchedUser.getId(), lecture.getId()));
             Email email = Email.from(reservation, user);
             emailService.saveEmail(email);
-            Notification.show("Reservation successful, email has been send");
+            showNotification("Reservation successful, email has been send",Notification.Type.HUMANIZED_MESSAGE);
         } catch (ReservationException ex) {
             Notification.show(ex.getMessage(), Notification.Type.WARNING_MESSAGE);
         }
     }
+
+
+    private void showNotification(String message,Notification.Type type){
+        Notification notification = new Notification(message,type);
+        notification.setDelayMsec(3000);
+        notification.setPosition(Position.MIDDLE_CENTER);
+        notification.show(Page.getCurrent());
+    }
+
 
 
 }
