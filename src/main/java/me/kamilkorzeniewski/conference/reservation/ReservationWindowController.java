@@ -11,7 +11,6 @@ import me.kamilkorzeniewski.conference.schedule.lecture.Lecture;
 import me.kamilkorzeniewski.conference.user.User;
 import me.kamilkorzeniewski.conference.user.UserService;
 
-import static com.vaadin.ui.Notification.Type.HUMANIZED_MESSAGE;
 
 @SpringComponent
 public class ReservationWindowController {

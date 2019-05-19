@@ -5,12 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Lecture {
-    private int id;
-    private String name;
-    private LectureTopic topic;
-    private int tickets;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private final int id;
+    private final String name;
+    private final LectureTopic topic;
+    private final int tickets;
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
 
     Lecture(int id, String name, LectureTopic topic, int tickets, LocalDateTime startTime, LocalDateTime endTime) {
         this.id = id;

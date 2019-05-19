@@ -9,15 +9,14 @@ import me.kamilkorzeniewski.conference.user.UserService;
 import me.kamilkorzeniewski.conference.utils.SpringContext;
 
 class EmailUpdateWindow extends Window {
-    private final TextField emailInput;
     private final Button saveButton;
     private final User user;
     private final Binder<EmailValue> binder;
 
     EmailUpdateWindow(User user) {
         final VerticalLayout content = new VerticalLayout();
+        final TextField emailInput = new TextField("New email");
         this.user = user;
-        this.emailInput = new TextField("New email");
         this.saveButton = new Button("Save", e -> saveButtonHandler());
 
         emailInput.addAttachListener(e -> validateInput());
